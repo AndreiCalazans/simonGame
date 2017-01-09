@@ -1,0 +1,62 @@
+
+
+*, *:before, *:after{
+ margin:0;
+ box-sizing: border-box;
+}
+
+
+
+
+.entry{
+  display:none;
+}
+.ui{
+  background: black;
+  height:100vh;
+  width:100%;
+}
+
+
+.gamePlay{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width:90vw;
+  height:90vh;
+}
+.subGamePlay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.msg {
+  text-align: center;
+  width:150px;
+
+  color:white;
+}
+.circle{
+  position: relative;
+  width: 100px;
+  height:100px;
+  margin: 30px;
+  border: 8px solid white;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+#red{
+  border-color: red;
+}
+#yellow{
+  border-color: yellow;
+}
+#green{
+  border-color: green;
+}
+#blue{
+  border-color: blue;
+}
