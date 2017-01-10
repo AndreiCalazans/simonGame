@@ -8,23 +8,40 @@
     <meta name='viewport' content="width= device-width , initial-scale = 1.0">
     <title>Simon Circle</title>
     <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
   </head>
   <body>
     <div class="ui">
       <div class="entry" >
+          <h1>Simon Circles</h1>
+
+          <div class="buttons">
+            <button type="button" onclick="gameStart()">Start</button>
+            <button>strick</button>
+            <p>Speed: </p><button>Normal/Fast</button>
+            <p>Rules</p>
+          </div>
+
+
 
       </div>
       <div class="game">
+        <div class="info">
+          <div class="subinfo"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i></div>
 
+
+          <div class="subinfo" id= "counter">0</div>
+          <div class="subinfo" id="heighest">0</div>
+        </div>
 
         <div class="gamePlay">
-          <div class="circle" id="red" ></div>
+          <div class="circle" data-num ="0" id="red" ></div>
           <div class="subGamePlay">
-              <div class="circle" id="blue" ></div>
+              <div class="circle" data-num ="1" id="blue" ></div>
               <div class="msg">You rock man!!!</div>
-              <div class="circle" id="yellow" ></div>
+              <div class="circle" data-num ="2" id="yellow" ></div>
           </div>
-          <div class="circle" id="green" ></div>
+          <div class="circle" data-num ="3" id="green" ></div>
 
         </div>
 
