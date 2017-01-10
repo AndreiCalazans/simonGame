@@ -5,27 +5,40 @@ var sounds = {
    sound2 : new Audio,
    sound3 : new Audio
 }
-// var sound1 = new Audio;
-// var sound2 = new Audio;
-// var sound3 = new Audio;
-// var sound4 = new Audio;
+
 sounds.sound0.src = 'simonSound1.mp3';
 sounds.sound1.src = 'simonSound2.mp3';
 sounds.sound2.src = 'simonSound3.mp3';
 sounds.sound3.src = 'simonSound4.mp3';
+var error = new Audio;
+error.src = "error.mp3";
 var game = true;
 var circles = document.getElementsByClassName("circle");
 var user = true;
 var array = [];
 var userSelected = [];
 var strictMode = false;
-var speed = 'normal';
+var speed = 500;
 var msg = document.querySelector(".msg");
 var userIsSuccess = true;
-var entryUI = document.querySelector(".entry");
+var entryUI = document.getElementById("entry");
+var counter = document.getElementById("counter");
+
 //functions
 ////////////////////////////////////
 /// makes random number to push to the array to make the simon says
+///to do
+//// increase communication example start , your turn, simons turn etc..
+/// speed increaser
+// put rules
+// add switch for strict mode
+
+var arrow = document.querySelector(".arrow");
+arrow.addEventListener("click", function(){
+ gameOver();
+ entryUI.style.display = "flex";
+})
+
 function arrayCreator(){
   if(userIsSuccess){
     var number = Math.floor(Math.random() * 4 )
@@ -36,13 +49,17 @@ function arrayCreator(){
 
 ///////////////////
 function iterator(){
+
   for (var i = 0 ; i < array.length ; i++){
      lightSequence(i);
+
   }
 };
 ////////////////////////
 function lightSequence(i){
-  setTimeout( function(){  lightUp(array[i]); }, 500*i);
+
+  setTimeout( function(){  lightUp(array[i]); }, speed*i);
+  setTimeout(function(){ user =true; }, array.length * speed);
 };
 //////////////////////////
 function lightUp(index){
@@ -66,19 +83,26 @@ function doesItMatch(a , b ){
 };
 ///////////////////////////////
 function userClick(){
+
  if(!user){
    userSelected = [];
    return;
  }
 
+ if(userSelected.length == array.length){
+   error.currentTime = 0;
+    error.play();
+    return;
+  }
      lightUp(this.dataset.num);
      userSelected.push(this.dataset.num);
-     console.log(userSelected);
+     counter.innerHTML = userSelected.length;
 
      ////////////test////////////
      if(userSelected.length == array.length){
        if(checkStatus()){
-         setTimeout( gamePlaying,1000);
+
+         setTimeout( gamePlaying,speed*2);
        }else {
          gameOver();
        }
@@ -99,8 +123,7 @@ function userTurn(){
 function gameOver(){
   game = false;
   user = false;
-  msg.innerHTML = `<div>You Lose!</div>
-  <div id="lost"><i onclick='gameStart()' class="fa fa-repeat" aria-hidden="true"></i><p>Play again</p></div>`;
+  msg.innerHTML = '<div>You Lose!</div><div id="lost"><i onclick="gameStart()" class="fa fa-repeat" aria-hidden="true"></i><p>Play again</p></div>';
   array = [];
   userSelected = [];
   return ;
@@ -118,9 +141,11 @@ function repeat(){
 ///////////////////////////
 
 function gameStart(){
-  //////create intro////
+  game =true;
  entryUI.style.display = "none";
- msg.innerHTML = "focus man!!!"
+  //////create intro////
+ counter.innerHTML = userSelected.length; //update
+msg.innerHTML ="Attention now";
 
   ///gameplay////
   for(var i = 0 ; i < circles.length ; i++){
@@ -136,11 +161,12 @@ function gameStart(){
 
 ////////////////////////////////
 function gamePlaying() {
+
+    msg.innerHTML="Attention";
     user= false;
     arrayCreator();
     iterator();
-    console.log(array);
-    user = true;
+
     userSelected = [];
   };
 
@@ -155,9 +181,10 @@ function gamePlaying() {
     }
   }
     if(doesItMatch(array , userSelected)){
-      msg.innerHTML = "horay keep going";
+      msg.innerHTML = "Horay!";
       return true;
     }else {
+      console.log("wrong");
       msg.innerHTML = "Try one more time";
       user=true;
       userIsSuccess = false;
