@@ -28,10 +28,7 @@ body{
 #entry button {
   margin:10px;
 }
-#entry p {
 
-  margin: 50px;
-}
 /*above are the entry things UI*/
 .ui{
   background: black;
@@ -123,4 +120,37 @@ body{
 }
 #lost i:active {
   transform: scale(1.1);
+}
+/*below are the css for the switch */
+.switch {
+  opacity: 0;
+}
+.switch-btn {
+  position:relative;
+  width:80px;
+  height:40px;
+  top:-10px;
+  background: #e5e5e5;
+  cursor:pointer;
+  border-radius:20px;
+  box-shadow: 0 0 4px 1px #47cb8f, inset 0 0 1px 2px rgba(0, 0, 0, 0.71);
+}
+.switch-btn:before{
+  content:"";
+  position:absolute;
+  height:36px;
+  width:36px;
+  background:linear-gradient(#FFF,#f2f2f2);
+  left:2px;
+  top:2px;
+  border-radius:50%;
+  box-shadow: 0 8px 6px -4px rgba(0,0,0,0.25);  transition:all 150ms ease-out;
+
+}
+input[type=checkbox]:checked + .switch-btn:before  {
+  left:42px;
+}
+
+input[type=checkbox]:checked + .switch-btn {
+ background:#47cb8f;
 }

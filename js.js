@@ -23,6 +23,7 @@ var msg = document.querySelector(".msg");
 var userIsSuccess = true;
 var entryUI = document.getElementById("entry");
 var counter = document.getElementById("counter");
+var strictModeToggle = document.getElementById("strictMode");
 
 //functions
 ////////////////////////////////////
@@ -141,6 +142,11 @@ function repeat(){
 ///////////////////////////
 
 function gameStart(){
+  if(strictModeToggle.checked == true){
+    strictMode = true;
+  }else {
+    strictMode = false;
+  }
   game =true;
  entryUI.style.display = "none";
   //////create intro////
@@ -177,6 +183,7 @@ function gamePlaying() {
       if(!doesItMatch(array , userSelected)){
       return false;
     }else{
+      msg.innerHTML = "Horay!";
       return true;
     }
   }
