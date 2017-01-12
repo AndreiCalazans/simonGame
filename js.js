@@ -29,15 +29,16 @@ var strictModeToggle = document.getElementById("strictMode");
 ////////////////////////////////////
 /// makes random number to push to the array to make the simon says
 ///to do
-//// increase communication example start , your turn, simons turn etc..
+/// stop game in any wrong click!!
+// add dynamic replies to win and lose (using lights and sound)
 /// speed increaser
 // put rules
-// add switch for strict mode
 
 var arrow = document.querySelector(".arrow");
 arrow.addEventListener("click", function(){
  gameOver();
- entryUI.style.display = "flex";
+ // entryUI.style.display = "flex";
+ $("#entry").toggle("slow");
 })
 
 function arrayCreator(){
@@ -53,14 +54,13 @@ function iterator(){
 
   for (var i = 0 ; i < array.length ; i++){
      lightSequence(i);
-
   }
 };
 ////////////////////////
 function lightSequence(i){
 
   setTimeout( function(){  lightUp(array[i]); }, speed*i);
-  setTimeout(function(){ user =true; }, array.length * speed);
+  setTimeout(function(){ msg.innerHTML="your turn"; user =true; }, array.length * speed);
 };
 //////////////////////////
 function lightUp(index){
@@ -89,7 +89,6 @@ function userClick(){
    userSelected = [];
    return;
  }
-
  if(userSelected.length == array.length){
    error.currentTime = 0;
     error.play();
@@ -124,7 +123,7 @@ function userTurn(){
 function gameOver(){
   game = false;
   user = false;
-  msg.innerHTML = '<div>You Lose!</div><div id="lost"><i onclick="gameStart()" class="fa fa-repeat" aria-hidden="true"></i><p>Play again</p></div>';
+  msg.innerHTML = '<div>You Lose!</div><div id="lost"><i onclick="gameStart(\'restart\')" class="fa fa-repeat" aria-hidden="true"></i><p>Play again</p></div>';
   array = [];
   userSelected = [];
   return ;
@@ -141,24 +140,27 @@ function repeat(){
 
 ///////////////////////////
 
-function gameStart(){
+function gameStart(a){
   if(strictModeToggle.checked == true){
     strictMode = true;
   }else {
     strictMode = false;
   }
   game =true;
- entryUI.style.display = "none";
+ // entryUI.style.display = "none";
+ if(a != "restart"){
+    $("#entry").toggle("slow");
+ };
+
   //////create intro////
  counter.innerHTML = userSelected.length; //update
-msg.innerHTML ="Attention now";
+msg.innerHTML ="Simon's turn";
 
   ///gameplay////
   for(var i = 0 ; i < circles.length ; i++){
       circles[i].removeEventListener("click" , userTurn);
   };
-
-  gamePlaying();
+  setTimeout(gamePlaying , 1000);
   userTurn();
 
 };
@@ -168,7 +170,7 @@ msg.innerHTML ="Attention now";
 ////////////////////////////////
 function gamePlaying() {
 
-    msg.innerHTML="Attention";
+    msg.innerHTML="Simon's turn";
     user= false;
     arrayCreator();
     iterator();
