@@ -11,7 +11,7 @@ sounds.sound1.src = 'simonSound2.mp3';
 sounds.sound2.src = 'simonSound3.mp3';
 sounds.sound3.src = 'simonSound4.mp3';
 var error = new Audio;
-error.src = "error.mp3";
+error.src = "negativeBeep.wav";
 var game = true;
 var circles = document.getElementsByClassName("circle");
 var user = true;
@@ -31,8 +31,24 @@ var strictModeToggle = document.getElementById("strictMode");
 /// keep score of highest
 // if win create a celebration animation
 /// speed increaser
-// put rules
+// // put rules
 
+
+
+
+// controls for the rules
+//////////////////////////////////
+var ruleBtn = document.getElementById("rule");
+var closeRules = document.getElementById("close");
+var rules = document.querySelector(".rules");
+ruleBtn.addEventListener("click", function(){
+  $(".rules").show("slide");
+})
+closeRules.addEventListener('click', function(){
+  $(".rules").hide("slide");
+})
+
+//////////////////////////////////////////////
 var arrow = document.querySelector(".arrow");
 arrow.addEventListener("click", function(){
  gameOver();

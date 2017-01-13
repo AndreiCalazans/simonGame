@@ -24,13 +24,18 @@ body{
   align-items: center;
   flex-direction: column;
   text-align: center;
+  user-select: none;
 }
 #entry button {
   margin:10px;
 }
-
+#entry > div > div > p:nth-child(3) img{
+  position: relative;
+  top:17px;
+}
 /*above are the entry things UI*/
 .ui{
+  user-select:none;
   background: black;
   height:100vh;
   max-width:700px;
@@ -55,12 +60,14 @@ body{
   color: white;
 }
 .subinfo {
-  width:33%;
+  width:50%;
   padding:20px;
   margin: 20px;
   font-size: 40px;
 }
-#counter , #heighest {
+#counter {
+  position: relative;
+  left:-95px;
   text-align: center;
 }
 .subinfo i {
@@ -154,6 +161,31 @@ input[type=checkbox]:checked + .switch-btn:before  {
 input[type=checkbox]:checked + .switch-btn {
  background:#47cb8f;
 }
+
+.rules {
+    padding:20px;
+    width: 250px;
+    height: auto;
+    position: absolute;
+    display: none;
+    background: black;
+    /* color: black; */
+    border: 1px solid white;
+    box-shadow: 0 0 10px 5px rgba(255,255,255,0.6);
+    z-index: 6;
+    top:30%;
+    left:40%;
+    flex:3;
+}
+@media screen and (max-width:620px){
+  .rules{
+    left:20%;
+  }
+}
+#close {
+position: absolute;
+top: 0;
+right: 6px;
 /*alert when loose and choose wrong btn */
 .alert {
   animation : alert 0.5s ease-in-out 0s 1 alternate, shake 0.5s ease-in-out 0s 1;

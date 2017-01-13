@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="ui">
-      <div id="entry" >
+      <div id="entry"  >
           <h1>Simon Circles</h1>
 
           <div class="buttons">
@@ -24,19 +24,23 @@
               <div class="switch-btn"></div>
             </label>
 
-            <p>Rules ?</p>
+            <p>Rules <i id="rule" class="fa fa-hand-pointer-o" aria-hidden="true"></i></p>
+            <div class="rules"><i id="close" class="fa fa-times" aria-hidden="true"></i><p>This is a memory game, first during simon's turn, it will select a sequence of lights, then
+              during your turn you shall select the same sequence to show your good memory.
+              <img src="example.png" alt="picture showing a lighting circle" width="200px">
+              if you choose strict mode, you won't have a second chance while in strict mode off , it's possible
+              to try again.</p>
+              <p>strict on : <img src="strictOn.png" alt=""></p>
+            </div>
           </div>
-
-
-
       </div>
+
       <div class="game">
         <div class="info">
           <div class="subinfo"><i class="arrow fa fa-arrow-circle-left" aria-hidden="true"></i></div>
 
 
           <div class="subinfo" id= "counter">0</div>
-          <div class="subinfo" id="heighest">0</div>
         </div>
 
         <div class="gamePlay">
