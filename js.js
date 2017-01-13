@@ -27,10 +27,9 @@ var strictModeToggle = document.getElementById("strictMode");
 
 //functions
 ////////////////////////////////////
-/// makes random number to push to the array to make the simon says
 ///to do
-/// stop game in any wrong click!!
-// add dynamic replies to win and lose (using lights and sound)
+/// keep score of highest
+// if win create a celebration animation
 /// speed increaser
 // put rules
 
@@ -65,9 +64,10 @@ function lightSequence(i){
 //////////////////////////
 function lightUp(index){
   circles[index].style.background = circles[index].id;
+  circles[index].style.boxShadow = "0 0 20px 3px rgba(255, 255, 255, 0.5)" ;
   sounds["sound"+index].currentTime = 0;
   sounds["sound"+index].play();
-  setTimeout(function(){circles[index].style.background = "none";}, 200);
+  setTimeout(function(){circles[index].style.background = "none"; circles[index].style.boxShadow = "none"; }, 200);
 };
 
 
@@ -99,14 +99,15 @@ function userClick(){
      counter.innerHTML = userSelected.length;
 
      ////////////test////////////
-     if(userSelected.length == array.length){
        if(checkStatus()){
-
-         setTimeout( gamePlaying,speed*2);
+         if(userSelected.length == array.length){
+           user = false;
+            setTimeout( gamePlaying,speed*2);
+         };
        }else {
          gameOver();
        }
-     }
+
 };
 ////////////////////////
 
@@ -123,6 +124,9 @@ function userTurn(){
 function gameOver(){
   game = false;
   user = false;
+  alertLights();
+  error.play();
+  setTimeout(alertLights,600);   // this is to remove the alert class
   msg.innerHTML = '<div>You Lose!</div><div id="lost"><i onclick="gameStart(\'restart\')" class="fa fa-repeat" aria-hidden="true"></i><p>Play again</p></div>';
   array = [];
   userSelected = [];
@@ -165,6 +169,13 @@ msg.innerHTML ="Simon's turn";
 
 };
 
+function alertLights(){
+  // instead of doing this replace for the animating css
+      for(var i = 0 ; i < 4 ; i++){
+        circles[i].classList.toggle("alert");
+      }
+
+};
 
 
 ////////////////////////////////
@@ -182,21 +193,30 @@ function gamePlaying() {
 //true to continue
   function checkStatus(){
     if(strictMode){
-      if(!doesItMatch(array , userSelected)){
+      if(!doesItMatch(userSelected,array)){
       return false;
     }else{
       msg.innerHTML = "Horay!";
+      if(userSelected.length === array.length){
+        msg.innerHTML = "You did it!";
+      }
       return true;
     }
   }
-    if(doesItMatch(array , userSelected)){
+    if(doesItMatch(userSelected,array)){
       msg.innerHTML = "Horay!";
+        if(userSelected.length === array.length){
+          msg.innerHTML = "You did it!";
+        }
       return true;
     }else {
-      console.log("wrong");
+      alertLights();
+      error.play();
+      setTimeout(alertLights,600);
       msg.innerHTML = "Try one more time";
-      user=true;
+      user=false;
       userIsSuccess = false;
+      setTimeout(repeat, 1000);
       return true;
     }
   };
