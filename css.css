@@ -161,7 +161,10 @@ input[type=checkbox]:checked + .switch-btn:before  {
 input[type=checkbox]:checked + .switch-btn {
  background:#47cb8f;
 }
-
+#footer{
+  position: relative;
+  bottom: -30px;
+}
 .rules {
     padding:20px;
     width: 250px;

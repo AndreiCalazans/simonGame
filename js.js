@@ -212,7 +212,7 @@ function gamePlaying() {
       if(!doesItMatch(userSelected,array)){
       return false;
     }else{
-      msg.innerHTML = "Horay!";
+      msg.innerHTML = "Hooray!";
       if(userSelected.length === array.length){
         msg.innerHTML = "You did it!";
       }
@@ -220,7 +220,7 @@ function gamePlaying() {
     }
   }
     if(doesItMatch(userSelected,array)){
-      msg.innerHTML = "Horay!";
+      msg.innerHTML = "Hooray!";
         if(userSelected.length === array.length){
           msg.innerHTML = "You did it!";
         }
